@@ -1,4 +1,4 @@
-npmconst options = {
+const options = {
   webHook: {
     // Port to which you should bind is assigned to $PORT variable
     // See: https://devcenter.heroku.com/articles/dynos#local-environment-variables
