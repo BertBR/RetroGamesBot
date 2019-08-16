@@ -16,7 +16,7 @@ const url = 'https://retrogamesbot.herokuapp.com:443';
 const TelegramBot = require('node-telegram-bot-api')
 const math = require('mathjs')
 // replace the value below with the Telegram token you receive from @BotFather
-const token = '458733904:AAH-Fq8ABp5xVpLHf32uxKAbP-nMCLf4mgU';
+const token = process.env.TELEGRAM_TOKEN || '458733904:AAH-Fq8ABp5xVpLHf32uxKAbP-nMCLf4mgU';
 const bot = new TelegramBot(token, options);
 const today = new Date().getDay()
 
