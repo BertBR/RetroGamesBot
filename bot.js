@@ -1,3 +1,11 @@
+/**
+ * This example demonstrates setting up webhook
+ * on the Heroku platform.
+ */
+
+
+const TOKEN = process.env.TELEGRAM_TOKEN || '458733904:AAH-Fq8ABp5xVpLHf32uxKAbP-nMCLf4mgU';
+const TelegramBot = require('node-telegram-bot-api');
 const options = {
   webHook: {
     // Port to which you should bind is assigned to $PORT variable
@@ -12,21 +20,20 @@ const options = {
 // Add URL of your app to env variable or enable Dyno Metadata
 // to get this automatically
 // See: https://devcenter.heroku.com/articles/dyno-metadata
-const url = 'https://retrogamesbot.herokuapp.com:443';
-const TelegramBot = require('node-telegram-bot-api')
-const math = require('mathjs')
-// replace the value below with the Telegram token you receive from @BotFather
-const token = process.env.TELEGRAM_TOKEN || '458733904:AAH-Fq8ABp5xVpLHf32uxKAbP-nMCLf4mgU';
-const bot = new TelegramBot(token, options);
-const today = new Date().getDay()
+const url = process.env.APP_URL || 'https://retrogamesbot.herokuapp.com:443';
+const bot = new TelegramBot(TOKEN, options);
 
 
 // This informs the Telegram servers of the new webhook.
 // Note: we do not need to pass in the cert, as it already provided
-bot.setWebHook(`${url}/bot${token}`);
+bot.setWebHook(`${url}/bot${TOKEN}`);
 
-// Listen for any kind of message. There are different kinds of
-// messages.
+
+// Just to ping!
+bot.on('message', function onMessage(msg) {
+  bot.sendMessage(msg.chat.i
+const today = new Date().getDay()
+
 bot.on('message', (msg) => {
 	const IntRand = () => { return math.randomInt(226, 3445) }
 	const chatId = msg.chat.id
