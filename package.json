@@ -5,20 +5,19 @@
   "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-      "lint": "eslint .",
-      "start": "node ./bot.js",
-      "check": "npm run lint && npm run test"
+    "lint": "eslint .",
+    "start": "node ./bot.js",
+    "check": "npm run lint && npm run test"
   },
-  
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-      "node-telegram-bot-api": "^0.30.0",
-      "mathjs": "^6.0.4"
-    },
-    "devDependencies": {
-      "eslint": "^4.15.0",
-      "jest": "^22.1.2"
-    }
+    "node-telegram-bot-api": "^0.30.0",
+    "mathjs": "^6.0.4"
+  },
+  "devDependencies": {
+    "eslint": "^4.15.0",
+    "jest": "^22.1.2"
+  }
 }
