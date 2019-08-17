@@ -3,7 +3,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const url = 'https://retrogamesbot.herokuapp.com';
 const bot = new TelegramBot(TOKEN, options);
 
-bot.setWebHook(`${url}/bot${TOKEN}`);
+bot.setWebHook(`${url}`);
 
 
 // Just to ping!
