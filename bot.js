@@ -7,11 +7,7 @@ const options = {
 	}
 }
 const bot = new TelegramBot(TOKEN, options);
-
-bot.setWebHook(`${url}/bot${TOKEN}`);
-
-
-// Just to ping!
+bot.setWebHook(`${url}/${TOKEN}`);
 const today = new Date().getDay()
 
 bot.on('message', (msg) => {
