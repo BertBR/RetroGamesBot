@@ -1,9 +1,9 @@
-const TOKEN = '458733904:AAH-Fq8ABp5xVpLHf32uxKAbP-nMCLf4mgU';
+const TOKEN = '802150654:AAFx1hczbT2x31udxP_xfvQQ2bw9kCRsZ00';
 const TelegramBot = require('node-telegram-bot-api');
 const url = 'https://retrogamesbot.herokuapp.com';
 const bot = new TelegramBot(TOKEN, options);
 
-bot.setWebHook(`${url}/${TOKEN}`);
+bot.setWebHook(`${url}/bot${TOKEN}`);
 
 
 // Just to ping!
