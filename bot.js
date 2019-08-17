@@ -30,15 +30,6 @@ const bot = new TelegramBot(TOKEN, options);
 // Note: we do not need to pass in the cert, as it already provided
 bot.setWebHook(`${url}/bot${TOKEN}`);
 
-
-// Just to ping!
-bot.on('message', function onMessage(msg) {
-  bot.sendMessage(msg.chat.id, 'I am alive on Heroku!');
-});
-
-
-
-/*
 bot.on('message', (msg) => {
 	const IntRand = () => { return math.randomInt(226, 3445) }
 	const chatId = msg.chat.id
@@ -49,7 +40,7 @@ bot.on('message', (msg) => {
 		bot.sendPhoto(chatId, url, {caption: url}).catch(err => sortGame())
 	}
 
-if(today === 4) {
+if(today === 6) {
 	let i = 0
 	while(i<3){
 		sortGame()
@@ -58,4 +49,3 @@ if(today === 4) {
 	}
 }
 })
-*/
