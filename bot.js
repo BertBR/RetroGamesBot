@@ -1,17 +1,8 @@
-/**
- * This example demonstrates setting up webhook
- * on the Heroku platform.
- */
-
-
 const TOKEN = '458733904:AAH-Fq8ABp5xVpLHf32uxKAbP-nMCLf4mgU';
 const TelegramBot = require('node-telegram-bot-api');
 const url = 'https://retrogamesbot.herokuapp.com';
 const bot = new TelegramBot(TOKEN, options);
 
-
-// This informs the Telegram servers of the new webhook.
-// Note: we do not need to pass in the cert, as it already provided
 bot.setWebHook(`${url}/${TOKEN}`);
 
 
