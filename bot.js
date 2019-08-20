@@ -14,8 +14,12 @@ const WebOptions = {
   // Add URL of your app to env variable or enable Dyno Metadata
   // to get this automatically
   // See: https://devcenter.heroku.com/articles/dyno-metadata
-const WebHookUrl = process.env.APP_URL || 'https://retrogamesbot.herokuapp.com';
-const TOKEN = process.env.TELEGRAM_TOKEN || '802150654:AAFx1hczbT2x31udxP_xfvQQ2bw9kCRsZ00';
+const WebHookUrl = process.env.APP_URL ||  'https://retrogamesbot.herokuapp.com'; //HEROKU WEBHOOK
+
+'https://76390c8a.ngrok.io' //NGROK WEBHOOK
+const TOKEN = process.env.TELEGRAM_TOKEN || '802150654:AAFx1hczbT2x31udxP_xfvQQ2bw9kCRsZ00'; //TOKEN @RETROGAMES_BOT
+
+'458733904:AAH-Fq8ABp5xVpLHf32uxKAbP-nMCLf4mgU' //TOKEN BERTINNN_BOT
 const bot = new TelegramBot(TOKEN, WebOptions);
 bot.setWebHook(`${WebHookUrl}/bot${TOKEN}`)
 const today = new Date().getDay()
@@ -29,10 +33,17 @@ bot.on('message', (msg) => {
 	
 	let adminId = 318475027
 
+	//Sortear Games
 	if(msg.text === '/sortear' && msg.from.id === adminId)	
 	{
 		main();
 	}
+	//Check Bot Status
+	if(msg.text === '/status'){
+		bot.sendMessage(chatId, `Bot online!\n${new Date()} `)
+	}
+
+
 
 	async function main(){
 		try{
@@ -46,6 +57,8 @@ bot.on('message', (msg) => {
 				//console.log(fileNames)
 				//console.log(links)
 				createPoll({fileNames})
+			}else{
+				bot.sendMessage(chatId, "Hoje não é dia de sortear os jogos! Por favor aguarde até sábado.")
 			}	
 		}
 		catch(error){
