@@ -1,28 +1,10 @@
-const TelegramBot = require('node-telegram-bot-api')
+const web = require('./webhook')
 const math = require('mathjs')
-const WebOptions = {
-	webHook: {
-	  // Port to which you should bind is assigned to $PORT variable
-	  // See: https://devcenter.heroku.com/articles/dynos#local-environment-variables
-	  port: process.env.PORT || '3000'
-	  // you do NOT need to set up certificates since Heroku provides
-	  // the SSL certs already (https://<app-name>.herokuapp.com)
-	  // Also no need to pass IP because on Heroku you need to bind to 0.0.0.0
-	}
-  };
-  // Heroku routes from port :443 to $PORT
-  // Add URL of your app to env variable or enable Dyno Metadata
-  // to get this automatically
-  // See: https://devcenter.heroku.com/articles/dyno-metadata
-const WebHookUrl = process.env.APP_URL ||  'https://retrogamesbot.herokuapp.com'; //HEROKU WEBHOOK
+const TelegramBot = require('node-telegram-bot-api')
 
-'https://76390c8a.ngrok.io' //NGROK WEBHOOK
-const TOKEN = process.env.TELEGRAM_TOKEN || '802150654:AAFx1hczbT2x31udxP_xfvQQ2bw9kCRsZ00'; //TOKEN @RETROGAMES_BOT
-
-'458733904:AAH-Fq8ABp5xVpLHf32uxKAbP-nMCLf4mgU' //TOKEN BERTINNN_BOT
-const bot = new TelegramBot(TOKEN, WebOptions);
-bot.setWebHook(`${WebHookUrl}/bot${TOKEN}`)
 const today = new Date().getDay()
+const bot = new TelegramBot(web.TOKEN, web.WebOptions);
+bot.setWebHook(`${web.WebHookUrl}/bot${web.TOKEN}`)
 
 bot.on('message', (msg) => {
 	const IntRand = () => { return math.randomInt(226, 3445) }
@@ -40,29 +22,39 @@ bot.on('message', (msg) => {
 	}
 	//Check Bot Status
 	if(msg.text === '/status'){
-		bot.sendMessage(chatId, `Bot online!\n${new Date()} `)
+		bot.sendMessage(chatId, `Olá *${msg.from.first_name}*.\nBot online!\n${new Date()} `, {parse_mode: "Markdown"})
 	}
-
-
+	//Check Adminlist
+	if(msg.text === '/adminlist'){
+		let list = []
+		bot.getChatAdministrators(chatId)
+		.then(admins => {
+			admins.forEach(function (item){
+				list.push(item.user.first_name)			
+			})		
+			 list = list.toString().split(',').join('\n')
+			 bot.sendMessage(chatId, `Olá ${msg.from.first_name}, aqui está a lista de Admins:\n\n${list}`)
+			})
+		}
 
 	async function main(){
 		try{
-			if(today === 6) {
+			if(today === 4) {
 				while(i<3){
 					const File = await sortGame({i:i})	
 					fileNames[i] = File.document.file_name
-					links[i] =File.caption
+					links[i] = File.caption
 					i++		
 				}
 				//console.log(fileNames)
 				//console.log(links)
-				createPoll({fileNames})
+				createPoll({fileNames, links})
 			}else{
 				bot.sendMessage(chatId, "Hoje não é dia de sortear os jogos! Por favor aguarde até sábado.")
 			}	
 		}
 		catch(error){
-			console.log("Deu ruim!")
+			console.error("Deu ruim!", error)
 		}
 	}
 	function sortGame({i}){
@@ -75,7 +67,7 @@ bot.on('message', (msg) => {
 			)
 		})
 	}
-	function createPoll({fileNames}){
+	function createPoll({fileNames, links}){
 		let question =  "Escolha o próximo jogo da Maratona Retrô (Semanal)"
 		return new Promise (function resolvePromise(resolve, reject) {
 			return resolve (
