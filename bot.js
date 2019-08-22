@@ -39,7 +39,7 @@ bot.on('message', (msg) => {
 
 	async function main(){
 		try{
-			if(today === 4) {
+			if(today === 6) {
 				while(i<3){
 					const File = await sortGame({i:i})	
 					fileNames[i] = File.document.file_name
