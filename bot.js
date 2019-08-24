@@ -1,10 +1,7 @@
-const web = require('./webhook')
+const { bot } = require('./webhook')
 const math = require('mathjs')
-const TelegramBot = require('node-telegram-bot-api')
 
 const today = new Date().getDay()
-const bot = new TelegramBot(web.TOKEN, web.WebOptions);
-bot.setWebHook(`${web.WebHookUrl}/bot${web.TOKEN}`)
 
 bot.on('message', (msg) => {
 	const IntRand = () => { return math.randomInt(226, 3445) }
@@ -16,21 +13,23 @@ bot.on('message', (msg) => {
 	let adminId = 318475027
 
 	//Sortear Games
-	if(msg.text === '/sortear' && msg.from.id === adminId)	
+	if(msg.text === `/sortear@retrogamesbr_bot` && msg.from.id === adminId)	
 	{
 		main();
 	}
 	//Check Bot Status
-	if(msg.text === '/status'){
+	if(msg.text === '/status@retrogamesbr_bot'){
 		bot.sendMessage(chatId, `Olá *${msg.from.first_name}*.\nBot online!\n${new Date()} `, {parse_mode: "Markdown"})
 	}
 	//Check Adminlist
-	if(msg.text === '/adminlist'){
+	if(msg.text === '/adminlist@retrogamesbr_bot'){
 		let list = []
 		bot.getChatAdministrators(chatId)
 		.then(admins => {
-			admins.forEach(function (item){
-				list.push(item.user.first_name)			
+			admins.forEach((item) => {
+				if(item.user.is_bot === false){
+					list.push(item.user.first_name)	
+				}
 			})		
 			 list = list.toString().split(',').join('\n')
 			 bot.sendMessage(chatId, `Olá ${msg.from.first_name}, aqui está a lista de Admins:\n\n${list}`)
@@ -46,8 +45,6 @@ bot.on('message', (msg) => {
 					links[i] = File.caption
 					i++		
 				}
-				//console.log(fileNames)
-				//console.log(links)
 				createPoll({fileNames, links})
 			}else{
 				bot.sendMessage(chatId, "Hoje não é dia de sortear os jogos! Por favor aguarde até sábado.")
@@ -71,8 +68,8 @@ bot.on('message', (msg) => {
 		let question =  "Escolha o próximo jogo da Maratona Retrô (Semanal)"
 		return new Promise (function resolvePromise(resolve, reject) {
 			return resolve (
-				bot.sendMessage(chatId, `*${question}:*\n\n1️⃣ - [${fileNames[0]}](${links[0]})\n2️⃣ - [${fileNames[1]}](${links[1]})\n3️⃣ - [${fileNames[2]}](${links[2]})`, 
-				{parse_mode: "Markdown", disable_web_page_preview: "true"})
+				bot.sendMessage(chatId, `${question}:\n\n1️⃣ - [${fileNames[0]}](${links[0]})\n2️⃣ - [${fileNames[1]}](${links[1]})\n3️⃣ - [${fileNames[2]}](${links[2]})`, 
+				{parse_mode: "Markdown" , disable_web_page_preview: "true"})
 				.then(msg => {
 					bot.pinChatMessage(chatId, msg.message_id)
 				})	
