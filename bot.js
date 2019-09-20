@@ -14,8 +14,8 @@ bot.on('message', (msg) => {
 	let adminId = 318475027
 	
 	setInterval(function() {
-	  http.get("http://retrogamesbot.herokuapp.com")
-	  .then(res => console.log('RES:', res))
+	  const res = http.get("http://retrogamesbot.herokuapp.com")
+	  console.log('RES', res)
 	  if (today === 6) {
 		  main()
 	  }
