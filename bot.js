@@ -1,5 +1,6 @@
 const { bot } = require('./webhook')
 const math = require('mathjs')
+var http = require("http")
 
 const today = new Date().getDay()
 
@@ -11,6 +12,13 @@ bot.on('message', (msg) => {
 	let i = 0
 	
 	let adminId = 318475027
+	
+	setInterval(function() {
+	  http.get("http://retrogamesbot.herokuapp.com");
+	  if (today === 6) {
+		  main()
+	  }
+  }, 900000); // every 15 minutes (900000)
 
 	//Sortear Games
 	if(msg.text === `/sortear@retrogamesbr_bot` && msg.from.id === adminId)	
