@@ -15,7 +15,7 @@ bot.on('message', (msg) => {
 	
 	setInterval(function() {
 	  http.get("http://retrogamesbot.herokuapp.com")
-	  .then(res => console.log(res))
+	  .then(res => console.log('RES:', res))
 	  if (today === 6) {
 		  main()
 	  }
