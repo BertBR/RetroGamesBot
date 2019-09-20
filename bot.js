@@ -3,12 +3,12 @@ const math = require('mathjs')
 var http = require("http")
 setInterval(function () {
 	if(http.get("http://retrogamesbot.herokuapp.com")){
-        console.log('GET WAS SUCESSFULLY')
+        console.log('SET INTERVAL (15min) : GET WAS SUCESSFULLY')
     }
 	if (today === 6) {
 		main()
 	}
-}, 300000); // every 5 minutes (300000)
+}, 900000); // every 15 minutes (900000)
 
 const today = new Date().getDay()
 
