@@ -4,14 +4,14 @@ var http = require("http")
 
 const today = new Date().getDay()
 
-setInterval(function () {
-	if(http.get("http://retrogamesbot.herokuapp.com")){
-        console.log('SET INTERVAL (15min) : GET WAS SUCESSFULLY')
-    }
-	if (today === 6) {
-		main()
-	}
-}, 900000); // every 15 minutes (900000)
+// setInterval(function () {
+// 	if(http.get("http://retrogamesbot.herokuapp.com")){
+//         console.log('SET INTERVAL (15min) : GET WAS SUCESSFULLY')
+//     }
+// 	if (today === 6) {
+// 		main()
+// 	}
+// }, 900000); // every 15 minutes (900000)
 
 
 bot.on('message', (msg) => {
