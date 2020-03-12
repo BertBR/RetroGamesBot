@@ -42,7 +42,7 @@ bot.on('text', (ctx) => {
             i++
           }
         } else {
-          bot.sendMessage(chatId, 'Hoje não é dia de sortear os jogos! Por favor aguarde até sábado.')
+          ctx.reply('Hoje não é dia de sortear os jogos! Por favor aguarde até sábado.')
         }
       }
     } catch (error) {
