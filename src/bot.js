@@ -2,8 +2,7 @@ const { bot } = require('./web')
 
 const { getAdminList, sortGame } = require('./functions')
 
-// const today = new Date().getDay()
-const today = 6// test
+const today = new Date().getDay()
 
 bot.on('text', (ctx) => {
   const msg = ctx.message
