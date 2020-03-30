@@ -2,7 +2,6 @@
 
 # RetroGames 🇧🇷 - Bot
 
-
 Bot para o grupo [RetroGames 🇧🇷](http://t.me/retrogamesbr)
 
 > * Sorteio de jogos retrô aos sábados;
