@@ -36,16 +36,18 @@ bot.on('text', (ctx) => {
       }
 
       // Sortear Games
-      if (msg.text === '/sortear@retrogamesbr_bot' && msg.from.id === adminId) {
-        while (i < 3) {
-          console.log(i);
-          await sortGame(i, bot, chatId, fileNames, links, arrPhoto);
-          i++;
+      if (msg.text === '/sortear@retrogamesbr_bot') {
+        if (msg.from.id === adminId) {
+          while (i < 3) {
+            console.log(i);
+            await sortGame(i, bot, chatId, fileNames, links, arrPhoto);
+            i++;
+          }
+        } else {
+          ctx.reply(
+            'Você não tem permissão pra executar esse comando, pare de querer chamar atenção e vá jogar! xD',
+          );
         }
-      } else {
-        ctx.reply(
-          'Hoje não é dia de sortear os jogos! Por favor aguarde até sábado.',
-        );
       }
     } catch (error) {
       console.error('Deu ruim!', error);
