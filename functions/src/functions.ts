@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 
-const math = require('mathjs');
+import * as math from 'mathjs'
 
-async function createMsgtoPin(bot, chatId, fileNames, links, arrPhoto) {
+export async function createMsgtoPin(bot: any, chatId: any, fileNames: any, links: any, arrPhoto: any[]) {
   const question = 'Estes foram os jogos sorteados para a Maratona Retrô (Semanal)';
   const caption = `${question}:\n\n1️⃣ - [${fileNames[0]}](${links[0]})\n2️⃣ - [${fileNames[1]}](${links[1]})\n3️⃣ - [${fileNames[2]}](${links[2]})`;
 
@@ -23,12 +23,12 @@ async function createMsgtoPin(bot, chatId, fileNames, links, arrPhoto) {
       type: 'photo',
     },
   ])
-    .then((msg) => {
+    .then((msg: any) => {
       bot.telegram.pinChatMessage(chatId, msg[0].message_id);
     });
 }
 
-async function sortGame(i, bot, chatId, fileNames, links, arrPhoto) {
+export async function sortGame(i: number, bot: any, chatId: any, fileNames: any, links: any, arrPhoto: any[]) {
   const id = math.randomInt(226, 3445);
 
   const url = `https://t.me/virtualroms/${id}`;
@@ -61,12 +61,12 @@ async function sortGame(i, bot, chatId, fileNames, links, arrPhoto) {
   }
 }
 
-function getAdminList(bot, ctx, chatId) {
-  let list = [];
+export function getAdminList(bot:any, ctx:any, chatId:any) {
+  let list: any = [];
 
   ctx.getChatAdministrators(chatId)
 
-    .then((admins) => {
+    .then((admins: any[]) => {
       admins.forEach((item) => {
         if (item.user.is_bot === false) {
           list.push(item.user.first_name);
@@ -78,7 +78,3 @@ function getAdminList(bot, ctx, chatId) {
       bot.telegram.sendMessage(chatId, `Olá ${ctx.message.from.first_name}, aqui está a lista de Admins:\n\n${list}`);
     });
 }
-
-module.exports = {
-  sortGame, getAdminList,
-};
