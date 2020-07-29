@@ -1,5 +1,7 @@
 {
   "name": "functions",
+  "version": "1.0.2",
+  "description": "Bot to sort games on RetroGames group!",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
     "build": "tsc",
