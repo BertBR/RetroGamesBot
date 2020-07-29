@@ -1,25 +1,31 @@
 /* eslint-disable no-console */
 
 import * as math from 'mathjs'
+import bot from './bot'
+import app from './config/serviceAccount'
 
-export async function createMsgtoPin(bot: any, chatId: any, fileNames: any, links: any, arrPhoto: any[]) {
+const db = app.firestore()
+
+export async function createMsgtoPin(bot: any, games: any[]) {
   const question = 'Estes foram os jogos sorteados para a Maratona Retrô (Semanal)';
-  const caption = `${question}:\n\n1️⃣ - [${fileNames[0]}](${links[0]})\n2️⃣ - [${fileNames[1]}](${links[1]})\n3️⃣ - [${fileNames[2]}](${links[2]})`;
+  const caption = `${question}:\n\n1️⃣ - [${games[0].title}](${games[0].file_url})\n2️⃣ - [${games[1].title}](${games[1].file_url})\n3️⃣ - [${games[2].title}](${games[2].file_url})`;
+
+  const chatId = -1001297582723;
 
   bot.telegram.sendMediaGroup(chatId, [
     {
-      media: arrPhoto[0],
+      media: games[0].image_url,
       caption,
       parse_mode: 'Markdown',
       disable_web_page_preview: 'true',
       type: 'photo',
     },
     {
-      media: arrPhoto[1],
+      media: games[1].image_url,
       type: 'photo',
     },
     {
-      media: arrPhoto[2],
+      media: games[2].image_url,
       type: 'photo',
     },
   ])
@@ -28,40 +34,46 @@ export async function createMsgtoPin(bot: any, chatId: any, fileNames: any, link
     });
 }
 
-export async function sortGame(i: number, bot: any, chatId: any, fileNames: any, links: any, arrPhoto: any[]) {
-  const id = math.randomInt(226, 3445);
+export async function sortGame() {
 
-  const url = `https://t.me/virtualroms/${id}`;
+  let i = 0;
+  let url: any[] = []
+  let games: any[] = [];
 
-  const urlPhoto = `https://t.me/virtualroms/${id - 1}`;
+  function sortThree(i: number) {
+    while (i < 3) {
+      const id = math.randomInt(1, 4);
+      url.push(`https://t.me/virtualroms/${id}`);
+      i++;
+    }
+  }
+
+  sortThree(i);
+  console.log(url.length)
+
+  if(url.length < 3){
+    i = 2;
+    sortThree(i);
+  }
+
+  console.log(url.length)
+
+
 
   try {
-    const msg = await bot.telegram.sendDocument(chatId, url, { caption: url });
-    await bot.telegram.deleteMessage(chatId, msg.message_id);
+    const snapshot = await db.collection('games').where('file_url', 'in', url).get()
+    snapshot.forEach(doc => {
+      games.push(doc.data())
+    })
+    console.log(games)
+    createMsgtoPin(bot, games);
 
-    fileNames.push(msg.document.file_name
-      .replace(/\[NeoGeo]_/, '')
-      .replace(/\.\w+/, '')
-      .split('_').join(' '));
-
-    console.log(fileNames[i]);
-
-    links.push(msg.caption);
-
-    const msgPhoto = await bot.telegram.sendPhoto(chatId, urlPhoto);
-    await bot.telegram.deleteMessage(chatId, msgPhoto.message_id);
-
-    arrPhoto.push(msgPhoto.photo[0].file_id);
-
-    if (i === 2) {
-      createMsgtoPin(bot, chatId, fileNames, links, arrPhoto);
-    }
   } catch (error) {
-    await sortGame(i, bot, chatId, fileNames, links, arrPhoto);
+    console.log("error is ", error)
   }
 }
 
-export function getAdminList(bot:any, ctx:any, chatId:any) {
+export function getAdminList(bot: any, ctx: any, chatId: any) {
   let list: any = [];
 
   ctx.getChatAdministrators(chatId)

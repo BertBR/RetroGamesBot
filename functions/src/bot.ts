@@ -1,10 +1,10 @@
 import Telegraf from 'telegraf';
 import * as functions from 'firebase-functions';
 
-let config = require('./env.json');
+let config = functions.config();
 
-if (Object.keys(functions.config()).length) {
-  config = functions.config();
-}
+const bot = new Telegraf(config.bot.token);
 
-export const bot = new Telegraf(config.bot.token);
+// bot.launch()
+
+export default bot;
