@@ -5,7 +5,7 @@ import bot, {config} from './bot';
 import app from './config/serviceAccount';
 import { firestore } from 'firebase-admin';
 
-export class sortGame {
+export class SortGame {
 
   private db = app.firestore();
 
