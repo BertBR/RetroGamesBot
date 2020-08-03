@@ -1,31 +1,19 @@
 import * as functions from 'firebase-functions';
-import bot from './bot'
-import { SortGame } from './sortGame'
-import { GetTop10Data } from './getGameData'
-import { Context } from 'telegraf';
+import app from './server';
+import bot from './bot';
+import { GamesDAO } from './dataaccess/games.dao';
+const dataAccess: GamesDAO = new GamesDAO();
 
-const sort = new SortGame();
-const getTop10 = new GetTop10Data();
+bot.hears('/games@retrogamesbr_bot', (ctx) => dataAccess.topGames(ctx, 'games'));
+bot.hears('/consoles@retrogamesbr_bot', (ctx) => dataAccess.topConsoles(ctx, 'consoles'));
+bot.hears('/genres@retrogamesbr_bot', (ctx) => dataAccess.topGenres(ctx, 'genres'));
+bot.launch();
 
-bot.on('text', (ctx: Context) => {
-  try {
-    if (ctx.message?.text === '/games@retrogamesbr_bot') {
-      getTop10.topGames(ctx, 'games');
-    }
-    if (ctx.message?.text === '/consoles@retrogamesbr_bot') {
-      getTop10.topConsoles(ctx, 'consoles');
-    }
-    if (ctx.message?.text === '/genders@retrogamesbr_bot') {
-      getTop10.topGenders(ctx, 'consoles');
-    }
-  } catch (error) {
-    console.error('Error: ', error);
-  }
-})
+export const api = functions.https.onRequest(app);
 
 export const sortGames = functions.pubsub.schedule('5 0 * * 6')
   .timeZone('America/Sao_Paulo')
   .onRun(() => {
-    sort.sortThree();
+    dataAccess.sortThree()
     return true;
   });

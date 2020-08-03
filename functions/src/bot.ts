@@ -4,6 +4,5 @@ import * as functions from 'firebase-functions';
 export const config = functions.config();
 
 const bot = new Telegraf(config.bot.token);
-bot.launch()
 
 export default bot;

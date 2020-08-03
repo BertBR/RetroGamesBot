@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <script src="./scripts.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <title>Retrogames - Cadastro</title>
+</head>
+
+<body>
+  <form>
+    <fieldset>
+    
+    <!-- Form Name -->
+    <legend>Cadastro de Games</legend>
+    
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="title">Título</label>  
+      <div class="col-md-4">
+      <input id="title" name="title" type="text" placeholder="Título do Game" class="form-control input-md" required="">
+        
+      </div>
+    </div>
+    
+    <!-- Prepended text-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="image_url">URL da Imagem</label>
+      <div class="col-md-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">https://t.me/virtualroms/</div>
+          <input id="image_url" name="image_url" class="form-control" placeholder="1" type="number" required="">
+        </div>
+        
+      </div>
+    </div>
+
+      <!-- Prepended text-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="file_url">URL do Arquivo</label>
+        <div class="col-md-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">https://t.me/virtualroms/</div>
+            <input id="file_url" name="file_url" class="form-control" placeholder="2" type="number" required="">
+          </div>
+          
+        </div>
+      </div>
+    
+    <!-- Multiple Radios -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="consoles">Selecione o console</label>
+      <div class="col-md-4">
+      <div class="radio">
+        <label for="consoles-0">
+          <input type="radio" name="consoles" id="consoles-0" value="Game Boy Advance" required>
+          Game Boy Advance
+        </label>
+      </div>
+      <div class="radio">
+        <label for="consoles-1">
+          <input type="radio" name="consoles" id="consoles-1" value="Game Boy Color">
+          Game Boy Color
+        </label>
+      </div>
+      <div class="radio">
+        <label for="consoles-2">
+          <input type="radio" name="consoles" id="consoles-2" value="Super Nintendo">
+          Super Nintendo
+        </label>
+      </div>
+      <div class="radio">
+        <label for="consoles-3">
+          <input type="radio" name="consoles" id="consoles-3" value="Mega Drive">
+          Mega Drive
+        </label>
+      </div>
+      <div class="radio">
+        <label for="consoles-4">
+          <input type="radio" name="consoles" id="consoles-4" value="Game Gear">
+          Game Gear
+        </label>
+      </div>
+      <div class="radio">
+        <label for="consoles-5">
+          <input type="radio" name="consoles" id="consoles-5" value="Sega CD">
+          Sega CD
+        </label>
+      </div>
+      <div class="radio">
+        <label for="consoles-6">
+          <input type="radio" name="consoles" id="consoles-6" value="Neo Geo">
+          Neo Geo
+        </label>
+      </div>
+      <div class="radio">
+        <label for="consoles-7">
+          <input type="radio" name="consoles" id="consoles-7" value="CPS-1">
+          CPS-1
+        </label>
+      </div>
+      <div class="radio">
+        <label for="consoles-8">
+          <input type="radio" name="consoles" id="consoles-8" value="CPS-2">
+          CPS-2
+        </label>
+      </div>
+      <div class="radio">
+        <label for="consoles-9">
+          <input type="radio" name="consoles" id="consoles-9" value="Nintendo DS">
+          Nintendo DS
+        </label>
+      </div>
+      <div class="radio">
+        <label for="consoles-10">
+          <input type="radio" name="consoles" id="consoles-10" value="Playstation">
+          Playstation
+        </label>
+      </div>
+      <div class="radio">
+        <label for="consoles-10">
+          <input type="radio" name="consoles" id="consoles-10" value="Master System">
+          Master System
+        </label>
+      </div>
+      <div class="radio">
+        <label for="consoles-10">
+          <input type="radio" name="consoles" id="consoles-10" value="DSiWare">
+          DSiWare
+        </label>
+      </div>
+      </div>
+    </div>
+    
+    <!-- Multiple Radios (inline) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="genres">Selecione o gênero</label>
+      <div class="col-md-4"> 
+        <label class="radio-inline" for="genres">
+          <input type="radio" name="genres" id="genres-0" value="rpg" required>
+          RPG
+        </label> 
+        <label class="radio-inline" for="genres-1">
+          <input type="radio" name="genres" id="genres-1" value="action">
+          Action
+        </label> 
+        <label class="radio-inline" for="genres-2">
+          <input type="radio" name="genres" id="genres-2" value="adventure">
+          Adventure
+        </label> 
+        <label class="radio-inline" for="genres-3">
+          <input type="radio" name="genres" id="genres-3" value="platform">
+          Platform
+        </label> 
+        <label class="radio-inline" for="genres-4">
+          <input type="radio" name="genres" id="genres-4" value="puzzle">
+          Puzzle
+        </label> 
+        <label class="radio-inline" for="genres-5">
+          <input type="radio" name="genres" id="genres-5" value="racing">
+          Racing
+        </label>
+      </div>
+    </div>
+    
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="submit"></label>
+      <div class="col-md-8">
+        <button id="submit" name="submit" type="submit" class="btn btn-primary">Enviar</button>
+        <button id="reset" name="reset" type="reset" class="btn btn-danger">Limpar</button>
+      </div>
+    </div>
+    
+    </fieldset>
+    </form>
+    
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+  integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</html>
