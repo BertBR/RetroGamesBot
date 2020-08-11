@@ -1,0 +1,12 @@
+POST http://localhost:5000/retrogames-be713/us-central1/api/games HTTP/1.1
+
+{
+ "title": "Jogo Foda",
+ "image_url": "https://t.me/virtualroms/50",
+ "file_url": "https://t.me/virtualroms/60",
+ "console": "Super Nintendo",
+ "genre": "RPG"
+}
+
+###
+http://localhost:5000/retrogames-be713/us-central1/api/games

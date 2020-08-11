@@ -8,8 +8,26 @@
   <script src="./scripts.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="apple-touch-icon" sizes="57x57" href="./favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="./favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="./favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="./favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="./favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="./favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="./favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="./favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="./favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="./favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<link rel="manifest" href="./favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
   <title>Retrogames - Cadastro</title>
 </head>
+
 
 <body>
   <form>
@@ -173,10 +191,10 @@
         <label class="col-md-4 control-label" for="submit"></label>
         <div class="col-md-8">
           <!-- Button trigger modal -->
-          <button id="submit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          <button type="button" onclick="showModal()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Enviar
           </button>
-          <button id="reset" name="reset" type="reset" class="btn btn-danger">Limpar</button>
+          <button name="reset" type="reset" class="btn btn-danger">Limpar</button>
         </div>
       </div>
     </fieldset>
@@ -197,7 +215,7 @@
           <b><span id="data" class="data"></span></b>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-          <button id="ok" type="button" class="btn btn-primary">Sim</button>
+          <button id="ok" type="button" onclick="addGame()" class="btn btn-primary">Sim</button>
         </div>
       </div>
     </div>
@@ -209,5 +227,6 @@
   integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
   integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </html>

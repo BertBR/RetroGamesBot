@@ -176,11 +176,11 @@ export class GamesDAO {
   // Database
   public async create(game: Game) {
 
-    const id = await this.db.collection('games').add({
+    const {id} = await this.db.collection('games').add({
       ...game,
       sorted: 0
     })
-
+    
     return id;
   }
 

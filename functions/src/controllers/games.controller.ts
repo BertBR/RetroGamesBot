@@ -6,7 +6,7 @@ export class GameController {
 
   public createGame = async(req: Request, res: Response) => {
     const id = await this.dataAccess.create(req.body)
-    res.json({message: `Game ${req.body.title} m ID: ${id} , registered!`})
+    res.status(201).json({id: id})
   }
 
   public listGames = async(req: Request, res: Response) => {
