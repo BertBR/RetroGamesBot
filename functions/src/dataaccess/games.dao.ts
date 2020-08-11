@@ -196,4 +196,12 @@ export class GamesDAO {
     return games;
   }
 
+  public async countGames(ctx: Context) {
+    const snapshot = await this.db.collection('games').get();
+
+    const total = snapshot.size
+
+    return ctx.replyWithMarkdown(`Total de ${total} jogos cadastrados na base!`);
+  }
+
 }
