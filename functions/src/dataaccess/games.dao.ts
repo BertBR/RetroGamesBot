@@ -2,7 +2,6 @@ import {firestore} from 'firebase-admin'
 import app from '../config/serviceAccount';
 import * as math from 'mathjs';
 import bot, {config} from '../bot';
-import { Context } from 'telegraf';
 import { Game } from '../models/game.model';
 
 export class GamesDAO {
@@ -14,7 +13,7 @@ export class GamesDAO {
     .orderBy('sorted', 'desc')
     .limit(10);
 
-  public async topGames(ctx: Context, flag: string) {
+  public async topGames(message: any, flag: string) {
 
     const topTen = await this.topRef.get();
     let top: any[] = [];
@@ -28,11 +27,11 @@ export class GamesDAO {
       caption = caption + `${this.numbers[index]} [${item.title}](${item.file_url})  (${item.console}) - **${item.sorted}**\n`;
     });
 
-    const question = `Olá ${ctx.message?.from?.first_name}\nAqui está a lista dos TOP 10 ${flag} mais sorteados!`;
-    ctx.replyWithMarkdown(`${question}\n\n${caption}`);
+    const question = `Olá ${message.from.first_name}\nAqui está a lista dos TOP 10 ${flag} mais sorteados!`;
+    bot.telegram.sendMessage(message.from.id, `${question}\n\n${caption}`, {parse_mode: 'Markdown'});
   }
 
-  public async topConsoles(ctx: Context, flag: string) {
+  public async topConsoles(message: any, flag: string) {
 
     const topTen = await this.topRef.select('sorted', 'console').get();
     let top: any[] = [];
@@ -48,11 +47,11 @@ export class GamesDAO {
       caption = caption + `${this.numbers[index]} ${String(item.console).toUpperCase()} - **${item.sorted}**\n`;
     });
 
-    const question = `Olá ${ctx.message?.from?.first_name}\nAqui está a lista dos TOP 10 ${flag} mais sorteados!`;
-    ctx.replyWithMarkdown(`${question}\n\n${caption}`);
+    const question = `Olá ${message.from.first_name}\nAqui está a lista dos TOP 10 ${flag} mais sorteados!`;
+    bot.telegram.sendMessage(message.from.id, `${question}\n\n${caption}`, {parse_mode: 'Markdown'});
   }
 
-  public async topGenres(ctx: Context, flag: string) {
+  public async topGenres(message: any, flag: string) {
 
     const topTen = await this.topRef.select('sorted', 'genre').get();
     let top: any[] = [];
@@ -68,8 +67,8 @@ export class GamesDAO {
       caption = caption + `${this.numbers[index]} ${String(item.genre).toUpperCase()} - **${item.sorted}**\n`;
     });
 
-    const question = `Olá ${ctx.message?.from?.first_name}\nAqui está a lista dos TOP 10 ${flag} mais sorteados!`;
-    ctx.replyWithMarkdown(`${question}\n\n${caption}`);
+    const question = `Olá ${message.from.first_name}\nAqui está a lista dos TOP 10 ${flag} mais sorteados!`;
+    bot.telegram.sendMessage(message.from.id, `${question}\n\n${caption}`, {parse_mode: 'Markdown'});
   }
 
   private createTop10(arr: any[], key1: any, key2: any) {
@@ -196,12 +195,13 @@ export class GamesDAO {
     return games;
   }
 
-  public async countGames(ctx: Context) {
+  public async countGames(id: string) {
+    console.log('entrou no countgames')
     const snapshot = await this.db.collection('games').get();
 
     const total = snapshot.size
 
-    return ctx.replyWithMarkdown(`Total de ${total} jogos cadastrados na base!`);
+    return bot.telegram.sendMessage(id, `Total de ${total} jogos cadastrados na base!`, {parse_mode: 'Markdown'});
   }
 
 }

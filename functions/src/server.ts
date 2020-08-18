@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { GamesRoutes } from './routes/games.routes';
-
+import { BaseRoutes } from './routes/base.routes';
 class Server {
   public main: any;
 
@@ -11,10 +10,10 @@ class Server {
   }
 
   private ApplySettings() {
-    const gamesRoutes: GamesRoutes = new GamesRoutes;
+    const baseRoutes: BaseRoutes = new BaseRoutes;
 
     this.main.use(cors());
-    this.main.use('/', gamesRoutes.router)
+    this.main.use('/', baseRoutes.router)
   }
 
 
