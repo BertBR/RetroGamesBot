@@ -15,19 +15,24 @@ export class GameController {
   }
 
   public botCommands = async (req: Request, res: Response) => {
-    if (req.body.message.text === '/count@retrogamesbr_bot') {
-      res.send(await this.dataAccess.countGames(req.body.message.from.id));
+    // console.log(req.body)
+    if(req.body.message.text === '/sort@Bertinnnbot'){
+      res.send(this.dataAccess.sortThree());
     }
 
-    if (req.body.message.text === '/games@retrogamesbr_bot') {
+    if (req.body.message.text === '/count@Bertinnnbot') {
+      res.send(await this.dataAccess.countGames(req.body.message));
+    }
+
+    if (req.body.message.text === '/games@Bertinnnbot') {
       res.send(await this.dataAccess.topGames(req.body.message, 'games'));
     }
 
-    if (req.body.message.text === '/consoles@retrogamesbr_bot') {
+    if (req.body.message.text === '/consoles@Bertinnnbot') {
       res.send(await this.dataAccess.topConsoles(req.body.message, 'consoles'));
     }
 
-    if (req.body.message.text === '/genres@retrogamesbr_bot') {
+    if (req.body.message.text === '/genres@Bertinnnbot') {
       res.send(await this.dataAccess.topGenres(req.body.message, 'genres'));
     }
     
