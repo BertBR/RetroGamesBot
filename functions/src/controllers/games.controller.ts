@@ -15,7 +15,10 @@ export class GameController {
   }
 
   public botCommands = async (req: Request, res: Response) => {
-    // console.log(req.body)
+    if(!req.body.message){
+      res.send();
+    }
+
     if(req.body.message.text === '/sort@Bertinnnbot'){
       res.send(this.dataAccess.sortThree());
     }

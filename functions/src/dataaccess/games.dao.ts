@@ -9,11 +9,20 @@ export class GamesDAO {
   private topRef = this.db.collection('games')
     .where('sorted', '>', 0)
     .orderBy('sorted', 'desc')
-    .limit(10);
+
+  public async countGames(message: any) {
+
+    const snapshot = await this.db.collection('games').get();
+
+    const total = snapshot.size
+
+    return bot.telegram.sendMessage(message.chat.id, `Total de ${total} jogos cadastrados na base!`, { parse_mode: 'Markdown' });
+  }
+
 
   public async topGames(message: any, flag: string) {
 
-    const topTen = await this.topRef.get();
+    const topTen = await this.topRef.limit(10).get();
     let top: any[] = [];
     let caption = '';
 
@@ -102,8 +111,8 @@ export class GamesDAO {
         id: doc.id,
         ...doc.data()
       }
-      games.push(data)
-    })
+      games.push(data);
+    });
 
     for (let i = 0; i < 3; i++) {
       random.push(games[Math.floor(Math.random() * games.length)])
@@ -172,14 +181,4 @@ export class GamesDAO {
 
     return games;
   }
-
-  public async countGames(message: any) {
-
-    const snapshot = await this.db.collection('games').get();
-
-    const total = snapshot.size
-
-    return bot.telegram.sendMessage(message.chat.id, `Total de ${total} jogos cadastrados na base!`, { parse_mode: 'Markdown' });
-  }
-
 }
