@@ -5,6 +5,7 @@ export class Game {
   console: string = '';
   genre: string = '';
   sorted: number = 0
+  active: boolean = true;
 
   public static GetInstance(): Game {
     const instance: Game = new Game();
