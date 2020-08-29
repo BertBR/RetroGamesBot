@@ -1,7 +1,9 @@
 import { firestore } from 'firebase-admin'
+import axios from 'axios';
 import app from '../config/serviceAccount';
 import bot, { config } from '../bot';
 import { Game } from '../models/game.model';
+import { InlineQueryResultArticle } from 'telegraf/typings/telegram-types';
 export class GamesDAO {
 
   private db = app.firestore();
@@ -180,5 +182,39 @@ export class GamesDAO {
     });
 
     return games;
+  }
+
+  //external api
+  public async api(inline: any) {
+
+    const token = config.api.key;
+
+    const api = axios.create({
+      baseURL: 'https://api-v3.igdb.com',
+      headers: {
+        'user-key': token
+      }
+    })
+
+    const {data} = await api.post('/games', 
+      `fields name,url,id, summary; fields cover.image_id; search "${inline.query}";`
+    );
+
+    const result: Array<InlineQueryResultArticle> = data.map((item: any) => {
+     
+        return {
+          type: 'article',
+          input_message_content: {message_text: `${item.name}\n${item.url}`},
+          id: item.id,
+          title: item.name,
+          description: item.summary ?? '',
+          url: item.url,
+          thumb_url: `https://images.igdb.com/igdb/image/upload/t_thumb/${item?.cover?.image_id}.jpg` ?? ''
+        }
+
+      });
+
+    bot.telegram.answerInlineQuery(inline.id, result)
+
   }
 }
