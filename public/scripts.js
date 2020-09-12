@@ -1,3 +1,15 @@
+window.onload = function () {
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      alert('Bem vindo: ', user.email);
+    } else {
+      alert('Você não está logado!!!');
+      window.location.replace('https://retrogames-be713.web.app/')
+    }
+  })
+}
+
+
 let data = {}
 
 function showModal() {
@@ -27,8 +39,8 @@ async function addGame() {
     return;
   }
 
-  $.post('https://us-central1-retrogames-be713.cloudfunctions.net/api/games', data, function(res) {
-    if(res.id) {
+  $.post('https://us-central1-retrogames-be713.cloudfunctions.net/api/games', data, function (res) {
+    if (res.id) {
       alert('Game cadastrado com sucesso!');
       document.location.reload();
     } else {
