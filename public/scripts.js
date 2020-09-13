@@ -1,14 +1,13 @@
 window.onload = function () {
-  firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      alert('Bem vindo: ', user.email);
-    } else {
-      alert('Você não está logado!!!');
-      window.location.replace('https://retrogames-be713.web.app/')
-    }
-  })
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        document.getElementById('welcome').textContent = `Bem vindo:  ${user.email}`;
+      } else {
+        alert('Você não está logado!!!');
+        window.location.replace('https://retrogames-be713.web.app/')
+      }
+    })
 }
-
 
 let data = {}
 
