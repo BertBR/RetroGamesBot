@@ -4,8 +4,10 @@ import app from "../config/serviceAccount";
 import bot, { config } from "../bot";
 import { Game } from "../models/game.model";
 import { InlineQueryResultArticle } from "telegraf/typings/telegram-types";
+import { Cache } from "../config/caching";
 export class GamesDAO {
   private db = app.firestore();
+  private cache = new Cache();
   private numbers = [
     "1️⃣",
     "2️⃣",
@@ -23,31 +25,56 @@ export class GamesDAO {
     .where("sorted", ">", 0)
     .orderBy("sorted", "desc");
 
-  public async countGames(message: any) {
-    const snapshot = await this.db.collection("games").get();
-    const group = await this.db
-      .collection("games")
-      .orderBy("console", "desc")
-      .get();
-
+  private async updateCache(key: string) {
+    let isCached: any;
     let top: any[] = [];
+    let list = "";
 
-    group.forEach((doc) => {
+    const snapshot = await this.db.collection("games").get();
+    snapshot.forEach((doc) => {
       top.push(doc.data().console);
     });
-    var map = top.reduce(function(prev, cur) {
+
+    const countByConsoles = top.reduce((prev: any, cur: any) => {
       prev[cur] = (prev[cur] || 0) + 1;
       return prev;
     }, {});
-    
-    console.log(map)
+
+    const sortable = Object.entries(countByConsoles)
+      .sort(([, a]: any, [, b]: any) => b - a)
+      .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+
+    Object.entries(sortable).forEach(
+      (item) => (list = list + `${item.join(" : ")}\n`)
+    );
+
     const total = snapshot.size;
 
+    this.cache.set(key, [total, list]);
+
+    isCached = await this.cache.get(key);
+
+    return [total, list];
+  }
+
+  private buildCacheMessage(message: any, total: any, list: any) {
     return bot.telegram.sendMessage(
       message.chat.id,
-      `Total de ${total} jogos cadastrados na base!`,
+      `Total de ${total} jogos cadastrados na base!\n\n${list}`,
       { parse_mode: "Markdown" }
     );
+  }
+
+  public async countGames(message: any) {
+    let isCached: any = await this.cache.get("count");
+
+    if (!isCached) {
+      console.log("NO CACHE!")
+      const [total, list] = await this.updateCache("count");
+      return this.buildCacheMessage(message, total, list);
+    }
+    console.log("CACHED!!!")
+    return this.buildCacheMessage(message, isCached[0], isCached[1]);
   }
 
   public async topGames(message: any, flag: string) {
