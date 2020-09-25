@@ -20,6 +20,12 @@ Content-Type: application/json
 
 {
   "message": {
-    "text": "Olá!"
+    "from": {
+      "id": 318475027
+    },
+    "text": "/count@Bertinnnbot",
+    "chat": {
+      "id": 318475027
+    }
   }
 }
