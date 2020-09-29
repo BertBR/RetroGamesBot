@@ -1,10 +1,10 @@
 import NodeCache from 'node-cache';
 
 export class Cache {
-    private myCache = new NodeCache({stdTTL: 86400});
+    private myCache = new NodeCache({stdTTL: 3600});
 
-    set(key: string, searches: any) {
-      const success = this.myCache.set(key, searches);
+    set(key: string, value: any[]) {
+      const success = this.myCache.set(key, value);
       return success;
     }
 
@@ -16,5 +16,9 @@ export class Cache {
     del(key: string){
       this.myCache.del(key);
       return true;
+    }
+
+    list(){
+      return this.myCache.keys()
     }
 }

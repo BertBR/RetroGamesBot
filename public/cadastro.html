@@ -38,7 +38,7 @@
       <!-- Text input-->
       <div class="form-group">
         <label class="col-md-4 control-label" for="title">Título</label>
-        <div class="col-md-4">
+        <div class="col-md-2">
           <input id="title" name="title" type="text" placeholder="Título do Game" class="form-control input-md"
             required="">
 
@@ -48,7 +48,7 @@
       <!-- Prepended text-->
       <div class="form-group">
         <label class="col-md-4 control-label" for="image_url">URL da Imagem</label>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <div class="input-group-prepend">
             <div class="input-group-text">https://t.me/virtualroms/</div>
             <input id="image_url" name="image_url" class="form-control" placeholder="1" type="number" required="">
@@ -60,7 +60,7 @@
       <!-- Prepended text-->
       <div class="form-group">
         <label class="col-md-4 control-label" for="file_url">URL do Arquivo</label>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <div class="input-group-prepend">
             <div class="input-group-text">https://t.me/virtualroms/</div>
             <input id="file_url" name="file_url" class="form-control" placeholder="2" type="number" required="">
@@ -69,143 +69,46 @@
         </div>
       </div>
 
-      <!-- Multiple Radios -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="consoles">Selecione o console</label>
-        <div class="col-md-4">
-          <div class="radio">
-            <label for="consoles-0">
-              <input type="radio" name="consoles" id="consoles-0" value="Game Boy Advance" required>
-              Game Boy Advance
-            </label>
-          </div>
-          <!-- <div class="radio">
-            <label for="consoles-1">
-              <input type="radio" name="consoles" id="consoles-1" value="Game Boy Color">
-              Game Boy Color
-            </label>
-          </div> -->
-          <div class="radio">
-            <label for="consoles-2">
-              <input type="radio" name="consoles" id="consoles-2" value="Super Nintendo">
-              Super Nintendo
-            </label>
-          </div>
-          <!-- <div class="radio">
-            <label for="consoles-3">
-              <input type="radio" name="consoles" id="consoles-3" value="Mega Drive">
-              Mega Drive
-            </label>
-          </div> -->
-          <!-- <div class="radio">
-            <label for="consoles-4">
-              <input type="radio" name="consoles" id="consoles-4" value="Game Gear">
-              Game Gear
-            </label>
-          </div> -->
-          <!-- <div class="radio">
-            <label for="consoles-5">
-              <input type="radio" name="consoles" id="consoles-5" value="Sega CD">
-              Sega CD
-            </label>
-          </div> -->
-          <!-- <div class="radio">
-            <label for="consoles-6">
-              <input type="radio" name="consoles" id="consoles-6" value="Neo Geo">
-              Neo Geo
-            </label>
-          </div> -->
-          <!-- <div class="radio">
-            <label for="consoles-7">
-              <input type="radio" name="consoles" id="consoles-7" value="CPS-1">
-              CPS-1
-            </label>
-          </div>
-          <div class="radio">
-            <label for="consoles-8">
-              <input type="radio" name="consoles" id="consoles-8" value="CPS-2">
-              CPS-2
-            </label>
-          </div> -->
-          <!-- <div class="radio">
-            <label for="consoles-9">
-              <input type="radio" name="consoles" id="consoles-9" value="Nintendo DS">
-              Nintendo DS
-            </label>
-          </div> -->
-          <!-- <div class="radio">
-            <label for="consoles-10">
-              <input type="radio" name="consoles" id="consoles-10" value="Playstation">
-              Playstation
-            </label>
-          </div> -->
-          <!-- <div class="radio">
-            <label for="consoles-10">
-              <input type="radio" name="consoles" id="consoles-11" value="Master System">
-              Master System
-            </label>
-          </div> -->
-          <!-- <div class="radio">
-            <label for="consoles-10">
-              <input type="radio" name="consoles" id="consoles-12" value="DSiWare">
-              DSiWare
-            </label>
-          </div> -->
-        </div>
-      </div>
 
-      <!-- Multiple Radios (inline) -->
       <div class="form-group">
-        <label class="col-md-4 control-label" for="genres">Selecione o gênero</label>
-        <div class="col-md-4">
-          <label class="radio-inline" for="genres">
-            <input type="radio" name="genres" id="genres-0" value="RPG" required>
-            RPG
-          </label>
-          <label class="radio-inline" for="genres-1">
-            <input type="radio" name="genres" id="genres-1" value="Action">
-            Action
-          </label>
-          <label class="radio-inline" for="genres-2">
-            <input type="radio" name="genres" id="genres-2" value="Adventure">
-            Adventure
-          </label>
-          <label class="radio-inline" for="genres-3">
-            <input type="radio" name="genres" id="genres-3" value="Platform">
-            Platform
-          </label>
-          <label class="radio-inline" for="genres-4">
-            <input type="radio" name="genres" id="genres-4" value="Puzzle">
-            Puzzle
-          </label>
-          <label class="radio-inline" for="genres-5">
-            <input type="radio" name="genres" id="genres-5" value="Racing">
-            Racing
-          </label>
-          <label class="radio-inline" for="genres-6">
-            <input type="radio" name="genres" id="genres-6" value="Strategy">
-            Strategy
-          </label>
-          <label class="radio-inline" for="genres-7">
-            <input type="radio" name="genres" id="genres-7" value="Fighting">
-            Fighting
-          </label>
-          <label class="radio-inline" for="genres-8">
-            <input type="radio" name="genres" id="genres-8" value="Sports">
-            Sports
-          </label>
-          <label class="radio-inline" for="genres-9">
-            <input type="radio" name="genres" id="genres-9" value="Pinball">
-            Pinball
-          </label>
-          <label class="radio-inline" for="genres-10">
-            <input type="radio" name="genres" id="genres-10" value="Trivia">
-            Trivia
-          </label>
-          <label class="radio-inline" for="genres-11">
-            <input type="radio" name="genres" id="genres-11" value="Simulator">
-            Simulator
-          </label>
+          <div class="col-md-2">
+            <select id="consoles" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+              <option selected>Selecione o console</option>
+              <option value="CPS-1">CPS-1</option>
+              <option value="CPS-2">CPS-2</option>
+              <option value="DSiWare">DSiWare</option>
+              <option value="Game Boy Advance">Game Boy Advance</option>
+              <option value="Game Boy Color">Game Boy Color</option>
+              <option value="Game Gear">Game Gear</option>
+              <option value="Master System">Master System</option>
+              <option value="Mega Drive">Mega Drive</option>
+              <option value="Neo Geo">Neo Geo</option>
+              <option value="Nintendo DS">Nintendo DS</option>
+              <option value="Playstation 1">Playstation 1</option>
+              <option value="Sega CD">Sega CD</option>
+              <option value="Super Nintendo">Super Nintendo</option>
+            </select>
+          </div>
+        </div>
+
+
+      <div class="form-group">
+        <div class="col-md-2">
+          <select id="genres" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+            <option selected>Selecione o gênero</option>
+            <option value="Action">Action</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Fighting">Fighting</option>
+            <option value="Pinball">Pinball</option>
+            <option value="Platform">Platform</option>
+            <option value="Puzzle">Puzzle</option>
+            <option value="Racing">Racing</option>
+            <option value="RPG">RPG</option>
+            <option value="Simulator">Simulator</option>
+            <option value="Sports">Sports</option>
+            <option value="Strategy">Strategy</option>
+            <option value="Trivia">Trivia</option>
+          </select>
         </div>
       </div>
 

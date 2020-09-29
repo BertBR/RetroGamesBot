@@ -26,7 +26,6 @@ export class GamesDAO {
     .orderBy("sorted", "desc");
 
   private async updateCache(key: string) {
-    let isCached: any;
     let top: any[] = [];
     let list = "";
 
@@ -51,8 +50,6 @@ export class GamesDAO {
     const total = snapshot.size;
 
     this.cache.set(key, [total, list]);
-
-    isCached = await this.cache.get(key);
 
     return [total, list];
   }

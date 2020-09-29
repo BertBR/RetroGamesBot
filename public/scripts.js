@@ -16,8 +16,8 @@ function showModal() {
     title: $('#title').val(),
     image_url: `https://t.me/virtualroms/${$('#image_url').val()}`,
     file_url: `https://t.me/virtualroms/${$('#file_url').val()}`,
-    console: $('input[name="consoles"]:checked').val(),
-    genre: $('input[name="genres"]:checked').val(),
+    console: $('#consoles').val() === 'Selecione o console' ? undefined : $('#consoles').val(),
+    genre: $('#genres').val() === 'Selecione o gênero' ? undefined : $('#genres').val(),
   }
 
   const res = `Título: ${data.title}<br/>
