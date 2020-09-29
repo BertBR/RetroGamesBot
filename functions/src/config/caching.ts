@@ -1,7 +1,7 @@
 import NodeCache from 'node-cache';
 
 export class Cache {
-    private myCache = new NodeCache({stdTTL: 3600});
+    private myCache = new NodeCache();
 
     set(key: string, value: any[]) {
       const success = this.myCache.set(key, value);
