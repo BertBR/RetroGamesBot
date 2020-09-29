@@ -18,6 +18,7 @@ Bot from [RetroGames 🇧🇷](http://t.me/retrogamesbr)
 ### :gear: Como funciona ?
 
 - Sorteio de jogos retrô todo sábado às 00:05hs
+
   ![](.readme/assets/ss01.png)
 
 ### :rocket: Tecnologias
