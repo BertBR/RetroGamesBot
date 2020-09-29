@@ -23,7 +23,7 @@ Content-Type: application/json
       "id": 318475027,
       "first_name": "Api-Teste"
     },
-    "text": "/games@retrogamesbr_bot",
+    "text": "/count@retrogamesbr_bot",
     "chat": {
       "id": 318475027
     }
