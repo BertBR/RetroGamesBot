@@ -1,5 +1,5 @@
-import express from 'express';
-import { GameController } from '../controllers/games.controller';
+import express from "express";
+import { GameController } from "../controllers/games.controller";
 
 export class BaseRoutes {
   private gameControler: GameController = new GameController();
@@ -11,10 +11,8 @@ export class BaseRoutes {
   }
 
   private buildRoutes() {
-    this.router.post('/games', this.gameControler.createGame);
-    this.router.get('/games', this.gameControler.listGames);
-    this.router.post('/bot', this.gameControler.botCommands);
+    this.router.post("/games", this.gameControler.createGame);
+    this.router.get("/games", this.gameControler.listGames);
+    this.router.post("/bot", this.gameControler.botCommands);
   }
 }
-
-

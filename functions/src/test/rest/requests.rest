@@ -20,9 +20,10 @@ Content-Type: application/json
 {
   "message": {
     "from": {
-      "id": 318475027
+      "id": 318475027,
+      "first_name": "Api-Teste"
     },
-    "text": "/count@Bertinnnbot",
+    "text": "/games@retrogamesbr_bot",
     "chat": {
       "id": 318475027
     }

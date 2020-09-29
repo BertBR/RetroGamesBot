@@ -66,11 +66,9 @@ export class GamesDAO {
     let isCached: any = await this.cache.get("count");
 
     if (!isCached) {
-      console.log("NO CACHE!")
       const [total, list] = await this.updateCache("count");
       return this.buildCacheMessage(message, total, list);
     }
-    console.log("CACHED!!!")
     return this.buildCacheMessage(message, isCached[0], isCached[1]);
   }
 
@@ -84,9 +82,11 @@ export class GamesDAO {
     });
 
     top.forEach((item, index) => {
-      caption =
-        caption +
-        `${this.numbers[index]} [${item.title}](${item.file_url}) - **${item.sorted}**\n`;
+      if (this.numbers[index]) {
+        caption =
+          caption +
+          `${this.numbers[index]} [${item.title}](${item.file_url}) - **${item.sorted}**\n`;
+      }
     });
 
     const question = `Olá ${message.from.first_name}\nAqui está a lista dos TOP 10 ${flag} mais sorteados!`;
@@ -108,11 +108,13 @@ export class GamesDAO {
     const topConsoles = this.createTop10(top, "console", "sorted");
 
     topConsoles.forEach((item: any, index) => {
-      caption =
-        caption +
-        `${this.numbers[index]} ${String(item.console).toUpperCase()} - **${
-          item.sorted
-        }**\n`;
+      if (this.numbers[index]) {
+        caption =
+          caption +
+          `${this.numbers[index]} ${String(item.console).toUpperCase()} - **${
+            item.sorted
+          }**\n`;
+      }
     });
 
     const question = `Olá ${message.from.first_name}\nAqui está a lista dos TOP 10 ${flag} mais sorteados!`;
@@ -134,11 +136,13 @@ export class GamesDAO {
     const topGenders = this.createTop10(top, "genre", "sorted");
 
     topGenders.forEach((item: any, index) => {
-      caption =
-        caption +
-        `${this.numbers[index]} ${String(item.genre).toUpperCase()} - **${
-          item.sorted
-        }**\n`;
+      if (this.numbers[index]) {
+        caption =
+          caption +
+          `${this.numbers[index]} ${String(item.genre).toUpperCase()} - **${
+            item.sorted
+          }**\n`;
+      }
     });
 
     const question = `Olá ${message.from.first_name}\nAqui está a lista dos TOP 10 ${flag} mais sorteados!`;
@@ -162,7 +166,9 @@ export class GamesDAO {
     let obj2 = [];
 
     for (let prop in holder) {
-      obj2.push({ [key1]: prop, [key2]: holder[prop] });
+      if (holder.hasOwnProperty(prop)) {
+        obj2.push({ [key1]: prop, [key2]: holder[prop] });
+      }
     }
 
     return obj2;
@@ -205,9 +211,9 @@ export class GamesDAO {
     const question =
       "Estes foram os jogos sorteados para a Maratona Retrô (Semanal)";
     const caption = `${question}:\n\n
-    1️⃣ - [${games[0].title}](${games[0].file_url}) (${games[0].console})\n
-    2️⃣ - [${games[1].title}](${games[1].file_url}) (${games[1].console})\n
-    3️⃣ - [${games[2].title}](${games[2].file_url}) (${games[2].console})`;
+    1️⃣ - [${games[0].title}](${games[0].file_url}) (${games[0].genre})\n
+    2️⃣ - [${games[1].title}](${games[1].file_url}) (${games[1].genre})\n
+    3️⃣ - [${games[2].title}](${games[2].file_url}) (${games[2].genre})`;
 
     bot.telegram
       .sendMediaGroup(config.bot.chat, [

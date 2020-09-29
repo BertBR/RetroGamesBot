@@ -1,24 +1,24 @@
-import NodeCache from 'node-cache';
+import NodeCache from "node-cache";
 
 export class Cache {
-    private myCache = new NodeCache();
+  private myCache = new NodeCache();
 
-    set(key: string, value: any[]) {
-      const success = this.myCache.set(key, value);
-      return success;
-    }
+  set(key: string, value: any[]) {
+    const success = this.myCache.set(key, value);
+    return success;
+  }
 
-    async get(key: string) {
-      const value = await this.myCache.get(key);
-      return value;
-    }
+  async get(key: string) {
+    const value = await this.myCache.get(key);
+    return value;
+  }
 
-    del(key: string){
-      this.myCache.del(key);
-      return true;
-    }
+  del(key: string) {
+    this.myCache.del(key);
+    return true;
+  }
 
-    list(){
-      return this.myCache.keys()
-    }
+  list() {
+    return this.myCache.keys();
+  }
 }

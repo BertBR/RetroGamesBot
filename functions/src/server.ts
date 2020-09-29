@@ -1,6 +1,6 @@
-import express from 'express';
-import cors from 'cors';
-import { BaseRoutes } from './routes/base.routes';
+import express from "express";
+import cors from "cors";
+import { BaseRoutes } from "./routes/base.routes";
 class Server {
   public main: any;
 
@@ -10,13 +10,11 @@ class Server {
   }
 
   private ApplySettings() {
-    const baseRoutes: BaseRoutes = new BaseRoutes;
+    const baseRoutes: BaseRoutes = new BaseRoutes();
 
     this.main.use(cors());
-    this.main.use('/', baseRoutes.router)
+    this.main.use("/", baseRoutes.router);
   }
-
-
 }
 
-export default new Server().main
+export default new Server().main;
