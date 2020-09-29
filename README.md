@@ -26,6 +26,10 @@ Bot from [RetroGames 🇧🇷](http://t.me/retrogamesbr)
 
   ![](.readme/assets/ss01.png)
 
+- Função **inline** para buscar informações dos Games na api do IGDB
+
+  ![](.readme/assets/ss02.png)
+
 ### :rocket: Tecnologias
 
 <table>
