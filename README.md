@@ -1,10 +1,15 @@
 <p align="center"><img src=".readme/assets/logo.jpg"></p>
 
-<center>
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7eae0ece893a43da845ae9116b2bb196)](https://app.codacy.com/gh/BertBR/RetroGamesBot?utm_source=github.com&utm_medium=referral&utm_content=BertBR/RetroGamesBot&utm_campaign=Badge_Grade_Dashboard) ![](https://img.shields.io/github/repo-size/BertBR/RetroGamesBot) ![](https://img.shields.io/github/last-commit/BertBR/RetroGamesBot)
-
-</center>
+<p align="center">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/BertBR/RetroGamesBot?color=39d45f">
+  <a href="https://github.com/BertBR/RetroGamesBot/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/BertBR/RetroGamesBot?color=39d45f">
+  </a> 
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-39d45f">
+  <a href="https://github.com/BertBR/RetroGamesBot/stargazers">
+    <img alt="Stargazers" src="https://img.shields.io/github/stars/BertBR/RetroGamesBot?color=39d45f&logo=github">
+  </a>
+</p>
 
 # RetroGames 🇧🇷 - Bot
 
