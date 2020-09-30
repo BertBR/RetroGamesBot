@@ -1,17 +1,25 @@
 import { GamesDAO } from "../dataaccess/games.dao";
 import { Request, Response } from "express";
+import { config } from "../bot";
 
 export class GameController {
   private dataAccess: GamesDAO = new GamesDAO();
 
   public createGame = async (req: Request, res: Response) => {
-    const id = await this.dataAccess.create(req.body);
-    return res.status(201).json({ id: id });
+    if (req.headers.authorization === config.api.token) {
+      const id = await this.dataAccess.create(req.body);
+      return res.status(201).json({ id: id });
+    }
+
+    return res.status(403).send("Not Authorized!");
   };
 
   public listGames = async (req: Request, res: Response) => {
-    const games = await this.dataAccess.listAll();
-    return res.json(games);
+    if (req.headers.authorization === config.api.token) {
+      const games = await this.dataAccess.listAll();
+      return res.json(games);
+    }
+    return res.status(403).send("Not Authorized!");
   };
 
   public botCommands = async (req: Request, res: Response) => {
