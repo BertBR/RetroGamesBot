@@ -263,18 +263,30 @@ export class GamesDAO {
 
   //external api
   public async api(inline: any) {
-    const token = config.api.key;
-
+    let access_token;
     const api = axios.create({
-      baseURL: "https://api-v3.igdb.com",
-      headers: {
-        "user-key": token,
-      },
+      baseURL: config.api.base_url,
     });
+
+    let isCached: any = await this.cache.get("access_token");
+
+    if (!isCached) {
+      const { data } = await api.post(config.api.twitch_uri);
+      access_token = data.access_token;
+      this.cache.set("access_token", access_token);
+    } else {
+      access_token = isCached;
+    }
 
     const { data } = await api.post(
       "/games",
-      `fields name,url,id, summary; fields cover.image_id; search "${inline.query}";`
+      `fields name,url,id, summary; fields cover.image_id; search "${inline.query}";`,
+      {
+        headers: {
+          "Client-ID": config.api.client_id,
+          "Authorization": `Bearer ${access_token}`,
+        },
+      }
     );
 
     const result: Array<InlineQueryResultArticle> = data.map((item: any) => {
@@ -291,6 +303,6 @@ export class GamesDAO {
       };
     });
 
-    bot.telegram.answerInlineQuery(inline.id, result);
+    return bot.telegram.answerInlineQuery(inline.id, result);
   }
 }
