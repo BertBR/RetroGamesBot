@@ -5,8 +5,9 @@ const dataAccess: GamesDAO = new GamesDAO();
 
 export const api = functions.https.onRequest(app);
 
-export const sortGames = functions.pubsub
-  .schedule("5 0 * * 6")
+export const sortGames = functions
+  .runWith({ timeoutSeconds: 540 })
+  .pubsub.schedule("5 0 * * 6")
   .timeZone("America/Sao_Paulo")
   .onRun(() => {
     dataAccess.sortThree();

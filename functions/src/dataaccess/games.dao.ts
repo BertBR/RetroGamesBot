@@ -195,8 +195,8 @@ export class GamesDAO {
       random.push(games[Math.floor(Math.random() * games.length)]);
     }
 
-    random.forEach(async (game) => {
-      await this.db
+    random.forEach((game) => {
+      this.db
         .collection("games")
         .doc(game.id)
         .update({
@@ -284,7 +284,7 @@ export class GamesDAO {
       {
         headers: {
           "Client-ID": config.api.client_id,
-          "Authorization": `Bearer ${access_token}`,
+          Authorization: `Bearer ${access_token}`,
         },
       }
     );
