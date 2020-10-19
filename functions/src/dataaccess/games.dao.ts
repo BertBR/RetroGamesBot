@@ -3,7 +3,10 @@ import axios from "axios";
 import app from "../config/serviceAccount";
 import bot, { config } from "../bot";
 import { Game } from "../models/game.model";
-import { InlineQueryResultArticle } from "telegraf/typings/telegram-types";
+import {
+  InlineQueryResultArticle,
+  Message,
+} from "telegraf/typings/telegram-types";
 import { Cache } from "../config/caching";
 export class GamesDAO {
   private db = app.firestore();
@@ -25,7 +28,7 @@ export class GamesDAO {
     .where("sorted", ">", 0)
     .orderBy("sorted", "desc");
 
-  private async updateCache(key: string) {
+  private async updateCache(key: string): Promise<any[]> {
     let top: any[] = [];
     let list = "";
 
@@ -54,7 +57,11 @@ export class GamesDAO {
     return [total, list];
   }
 
-  private buildCacheMessage(message: any, total: any, list: any) {
+  private buildCacheMessage(
+    message: any,
+    total: any,
+    list: any
+  ): Promise<Message> {
     return bot.telegram.sendMessage(
       message.chat.id,
       `Total de ${total} jogos cadastrados na base!\n\n${list}`,
@@ -62,7 +69,7 @@ export class GamesDAO {
     );
   }
 
-  public async countGames(message: any) {
+  public async countGames(message: any): Promise<any> {
     let isCached: any = await this.cache.get("count");
 
     if (!isCached) {
@@ -72,7 +79,7 @@ export class GamesDAO {
     return this.buildCacheMessage(message, isCached[0], isCached[1]);
   }
 
-  public async topGames(message: any, flag: string) {
+  public async topGames(message: any, flag: string): Promise<void> {
     const topTen = await this.topRef.limit(10).get();
     let top: any[] = [];
     let caption = "";
@@ -80,7 +87,7 @@ export class GamesDAO {
     topTen.forEach((game) => {
       top.push(game.data());
     });
-
+    top.sort((a: any, b: any) => b.sorted - a.sorted);
     top.forEach((item, index) => {
       if (this.numbers[index]) {
         caption =
@@ -96,18 +103,17 @@ export class GamesDAO {
     });
   }
 
-  public async topConsoles(message: any, flag: string) {
-    const topTen = await this.topRef.select("sorted", "console").get();
+  public async topConsoles(message: any, flag: string): Promise<void> {
+    const topTen = await this.topRef.get();
     let top: any[] = [];
     let caption = "";
-
     topTen.forEach((game) => {
       top.push(game.data());
     });
 
     const topConsoles = this.createTop10(top, "console", "sorted");
-
-    topConsoles.forEach((item: any, index) => {
+    topConsoles.sort((a: any, b: any) => b.sorted - a.sorted);
+    topConsoles.forEach((item: any, index: any) => {
       if (this.numbers[index]) {
         caption =
           caption +
@@ -124,8 +130,8 @@ export class GamesDAO {
     });
   }
 
-  public async topGenres(message: any, flag: string) {
-    const topTen = await this.topRef.select("sorted", "genre").get();
+  public async topGenres(message: any, flag: string): Promise<void> {
+    const topTen = await this.topRef.get();
     let top: any[] = [];
     let caption = "";
 
@@ -134,8 +140,8 @@ export class GamesDAO {
     });
 
     const topGenders = this.createTop10(top, "genre", "sorted");
-
-    topGenders.forEach((item: any, index) => {
+    topGenders.sort((a: any, b: any) => b.sorted - a.sorted);
+    topGenders.forEach((item: any, index: any) => {
       if (this.numbers[index]) {
         caption =
           caption +
@@ -152,7 +158,7 @@ export class GamesDAO {
     });
   }
 
-  private createTop10(arr: any[], key1: any, key2: any) {
+  private createTop10(arr: any[], key1: any, key2: any): any {
     let holder: any = {};
 
     arr.forEach((d) => {
@@ -174,7 +180,7 @@ export class GamesDAO {
     return obj2;
   }
 
-  public async sortThree() {
+  public async sortThree(): Promise<any> {
     let random: any[] = [];
     let games: any[] = [];
 
@@ -207,7 +213,7 @@ export class GamesDAO {
     this.createMsgToPin(bot, random);
   }
 
-  private createMsgToPin(bot: any, games: any[]) {
+  private async createMsgToPin(bot: any, games: any[]): Promise<any> {
     const question =
       "Estes foram os jogos sorteados para a Maratona Retrô (Semanal)";
     const caption = `${question}:\n\n
@@ -239,7 +245,7 @@ export class GamesDAO {
   }
 
   // Database
-  public async create(game: Game) {
+  public async create(game: Game): Promise<string> {
     const { id } = await this.db.collection("games").add({
       ...game,
       sorted: 0,
@@ -262,7 +268,7 @@ export class GamesDAO {
   }
 
   //external api
-  public async api(inline: any) {
+  public async api(inline: any): Promise<any> {
     let access_token;
     const api = axios.create({
       baseURL: config.api.base_url,
