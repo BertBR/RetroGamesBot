@@ -29,3 +29,6 @@ Content-Type: application/json
     }
   }
 }
+
+###
+http://localhost:5001/retrogames-be713/us-central1/api/tmp

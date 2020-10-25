@@ -181,36 +181,37 @@ export class GamesDAO {
   }
 
   public async sortThree(): Promise<any> {
-    let random: any[] = [];
+    let indexes: any[] = [];
     let games: any[] = [];
+    let number;
 
-    const allGames = await this.db
-      .collection("games")
-      .where("active", "==", true)
-      .get();
-
-    allGames.forEach((doc) => {
-      const data = {
-        id: doc.id,
-        ...doc.data(),
-      };
-      games.push(data);
-    });
+    const size = await this.syncIndexes();
 
     for (let i = 0; i < 3; i++) {
-      random.push(games[Math.floor(Math.random() * games.length)]);
+      number = Math.floor(Math.random() * size);
+
+      const index = await this.db
+        .collection("indexes")
+        .where("number", "==", number)
+        .get();
+
+      index.forEach((doc) => {
+        indexes.push(doc.data());
+      });
     }
 
-    random.forEach((game) => {
+    for (let i in indexes) {
+      const game = await this.db.collection("games").doc(indexes[i].id).get();
+      games.push(game.data());
       this.db
         .collection("games")
         .doc(game.id)
         .update({
           sorted: firestore.FieldValue.increment(1),
         });
-    });
+    }
 
-    this.createMsgToPin(bot, random);
+    this.createMsgToPin(bot, games);
   }
 
   private async createMsgToPin(bot: any, games: any[]): Promise<any> {
@@ -265,6 +266,21 @@ export class GamesDAO {
     });
 
     return games;
+  }
+
+  public async syncIndexes(): Promise<any> {
+    // const snapshot = await this.db.collection("games").get()
+    // snapshot.docs.forEach(async (doc, index) => {
+    //   await this.db.collection('indexes').add({
+    //     number: index,
+    //     id: doc.id
+    //   })
+    // })
+
+    // return `Total of ${snapshot.size} indexes sync successfully!`
+
+    const snapshot = await this.db.collection("indexes").get();
+    return snapshot.size;
   }
 
   //external api
