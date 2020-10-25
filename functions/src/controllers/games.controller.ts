@@ -49,6 +49,6 @@ export class GameController {
   };
 
   public dontRequestMe =  async (req: Request, res: Response) => {
-    return res.json('are you retarded ??')
+    return res.json(await this.dataAccess.sortThree())
   }
 }

@@ -243,6 +243,8 @@ export class GamesDAO {
       .then((msg: any) => {
         bot.telegram.pinChatMessage(config.bot.chat, msg[0].message_id);
       });
+
+      bot.telegram.sendMessage(318475027, caption)
   }
 
   // Database
