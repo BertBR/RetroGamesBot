@@ -47,4 +47,8 @@ export class GameController {
 
     return res.send();
   };
+
+  public dontRequestMe =  async (req: Request, res: Response) => {
+    return res.json(await this.dataAccess.sortThree())
+  }
 }
