@@ -10,10 +10,11 @@ import IgdbService from './services/igdb.service';
 
 const bot = new Telegraf(process.env.BOT_TOKEN || '');
 
+bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}/${process.env.BOT_TOKEN}`);
 bot.launch({
   webhook: {
-    domain: `${process.env.WEBHOOK_URL}/${process.env.BOT_TOKEN}`,
-    port: 5000,
+    domain: process.env.WEBHOOK_URL,
+    port: parseInt(process.env.PORT || '0', 10) ?? 80,
   },
 });
 
