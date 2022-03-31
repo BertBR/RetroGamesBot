@@ -1,6 +1,6 @@
-import NodeCache from "node-cache";
+import NodeCache from 'node-cache';
 
-export class Cache {
+export default class Cache {
   private myCache = new NodeCache();
 
   set(key: string, value: unknown) {

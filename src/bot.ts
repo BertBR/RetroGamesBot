@@ -1,6 +1,12 @@
-import { Telegraf } from "telegraf";
-import { getTotalGames, getTotalSortedByConsole, getTotalSortedByGenre, getTotalSortedGames, sortThreeGames } from "./functions";
-import { IgdbService } from "./services/igdb.service";
+import { Telegraf } from 'telegraf';
+import {
+  getTotalGames,
+  getTotalSortedByConsole,
+  getTotalSortedByGenre,
+  getTotalSortedGames,
+  sortThreeGames,
+} from './functions';
+import IgdbService from './services/igdb.service';
 
 const bot = new Telegraf(process.env.BOT_TOKEN || '');
 
@@ -9,6 +15,6 @@ bot.command('consoles', async (ctx) => ctx.reply(await getTotalSortedByConsole(c
 bot.command('genres', async (ctx) => ctx.reply(await getTotalSortedByGenre(ctx)));
 bot.command('games', async (ctx) => ctx.replyWithMarkdown(await getTotalSortedGames(ctx), { disable_web_page_preview: true }));
 bot.command('sort', async (ctx) => sortThreeGames(ctx));
-bot.on('inline_query', async(ctx) => new IgdbService(ctx).run(ctx.inlineQuery))
+bot.on('inline_query', async (ctx) => new IgdbService(ctx).run(ctx.inlineQuery));
 
 export default bot;
