@@ -49,7 +49,7 @@ export const getTotalSortedByConsole = async (ctx: Context<Update>) => {
 
   if (isCached) {
     greetings = `Olá ${ctx.from?.first_name}.\nAqui está a lista dos TOP 10 consoles mais sorteados!\n\n`;
-    return greetings + isCached.data;
+    return greetings + isCached;
   }
 
   const res = await db.getTotalSortedBy('console');
@@ -67,7 +67,7 @@ export const getTotalSortedByGenre = async (ctx: Context<Update>) => {
   let greetings = `Olá ${ctx.from?.first_name}.\nAqui está a lista dos TOP 10 gêneros mais sorteados!\n\n`;
   if (isCached) {
     greetings = `Olá ${ctx.from?.first_name}.\nAqui está a lista dos TOP 10 gêneros mais sorteados!\n\n`;
-    return greetings + isCached.data;
+    return greetings + isCached;
   }
   const res = await db.getTotalSortedBy('genre');
   let data = '';
@@ -84,7 +84,7 @@ export const getTotalSortedGames = async (ctx: Context<Update>) => {
   let greetings = `Olá ${ctx.from?.first_name}.\nAqui está a lista dos TOP 10 games mais sorteados!\n\n`;
   if (isCached) {
     greetings = `Olá ${ctx.from?.first_name}.\nAqui está a lista dos TOP 10 games mais sorteados!\n\n`;
-    return greetings + isCached.data;
+    return greetings + isCached;
   }
   const res = await db.getTotalSortedGames();
   let data = '';
