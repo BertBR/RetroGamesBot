@@ -26,7 +26,7 @@ Bot from [RetroGames 🇧🇷](http://t.me/retrogamesbr)
 > - Premiações e brindes para os membros mais participativos
 > - Top 10 Games, Consoles e Gêneros mais sorteados
 
-### :gear: Como funciona ?
+### :gear: Como funciona
 
 - Sorteio de jogos retrô todo sábado às 00:05hs
 
