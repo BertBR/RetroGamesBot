@@ -1,6 +1,6 @@
-import { Pool } from 'pg'
+import { Pool } from 'pg';
 
-export class Database {
+export default class Database {
   private pool = new Pool({
     user: process.env.POSTGRES_USERNAME,
     host: process.env.POSTGRES_HOST,
@@ -35,6 +35,6 @@ export class Database {
 
   async getThreeRandomGames() {
     return this.pool.query(`SELECT * FROM games
-    ORDER BY random() LIMIT 5;`)
+    ORDER BY random() LIMIT 5;`);
   }
 }
