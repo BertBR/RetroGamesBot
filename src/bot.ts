@@ -9,7 +9,7 @@ import {
 import IgdbService from './services/igdb.service';
 
 const bot = new Telegraf(process.env.BOT_TOKEN || '');
-bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}/${process.env.BOT_TOKEN}`);
+bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}:${process.env.PORT}/${process.env.BOT_TOKEN}`);
 console.log(`Webhook set to ${process.env.WEBHOOK_URL}`);
 
 bot.command('count', async (ctx) => ctx.reply(await getTotalGames(ctx)));
