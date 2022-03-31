@@ -30,33 +30,6 @@ Bot from [RetroGames 🇧🇷](http://t.me/retrogamesbr)
 
   ![](.readme/assets/ss02.png)
 
-### :rocket: Tecnologias
-
-<table>
-  <thead>
-    <th>Backend</th>
-    <th>Firebase</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Node.js</td>
-      <td>Cloud Functions</td>
-    </tr>
-    <tr>
-      <td>Express</td>
-      <td>Firestore</td>
-    </tr>
-    <tr>
-      <td>Node-cache</td>
-      <td>Hosting</td>
-    </tr>
-    <tr>
-      <td>Typescript</td>
-      <td>Google Analytics</td>
-    </tr>
-  </tbody>
-</table>
-
 <a id="como-contribuir"></a>
 
 ## :recycle: Como contribuir
