@@ -11,7 +11,7 @@
   </a>
 </p>
 
-# RetroGames 🇧🇷 - Bot
+## RetroGames 🇧🇷 - Bot
 
 ### V 2.0 - Changelog
 - Projeto refatorado, eliminando a dependência do Firestore;
