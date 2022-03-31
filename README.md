@@ -13,6 +13,12 @@
 
 # RetroGames 🇧🇷 - Bot
 
+### V 2.0 - Changelog
+- Projeto refatorado, eliminando a dependência do Firestore;
+- Migramos os dados para uma base Postgres;
+- Agora nossa base de jogos está pública: [Database](https://github.com/BertBR/RetroGamesBot/blob/master/src/migration/games_postgres.sql)
+- Dashboard e relatórios no Metabase :soon: (W.I.P);
+
 Bot from [RetroGames 🇧🇷](http://t.me/retrogamesbr)
 
 > - Sorteio de jogos retrô aos sábados;
