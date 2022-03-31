@@ -3,7 +3,7 @@ import Context from 'telegraf/typings/context';
 // eslint-disable-next-line import/no-unresolved
 import { Update } from 'telegraf/typings/core/types/typegram';
 import Cache from './config/caching';
-import { Database } from './config/database_connection';
+import Database from './config/database_connection';
 
 const numbers = [
   '1️⃣',
