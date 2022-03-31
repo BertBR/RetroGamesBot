@@ -6,7 +6,7 @@ CREATE TABLE games(
   file_url  VARCHAR(29) NOT NULL,
   image_url VARCHAR(29) NOT NULL,
   sorted    INTEGER  NOT NULL,
-  active    VARCHAR(4) NOT NULL
+  active    BOOLEAN NOT NULL
 );
 
 INSERT INTO games(title,genre,console,file_url,image_url,sorted,active) VALUES ('Capcom Vs SNK Pro','Fighting','Playstation','https://t.me/virtualroms/3572','https://t.me/virtualroms/3571',1,'true');
