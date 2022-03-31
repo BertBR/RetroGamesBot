@@ -1,19 +1,11 @@
-<p align="center"><img src=".readme/assets/logo.jpg"></p>
+![](.readme/assets/logo.jpg)
 
-<p align="center">
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/BertBR/RetroGamesBot?color=39d45f">
-  <a href="https://github.com/BertBR/RetroGamesBot/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/BertBR/RetroGamesBot?color=39d45f">
-  </a> 
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-39d45f">
-  <a href="https://github.com/BertBR/RetroGamesBot/stargazers">
-    <img alt="Stargazers" src="https://img.shields.io/github/stars/BertBR/RetroGamesBot?color=39d45f&logo=github">
-  </a>
-</p>
+![Repository size](https://img.shields.io/github/repo-size/BertBR/RetroGamesBot?color=39d45f) [![GitHub last commit](https://img.shields.io/github/last-commit/BertBR/RetroGamesBot?color=39d45f)](https://github.com/BertBR/RetroGamesBot/commits/master) ![License](https://img.shields.io/badge/license-MIT-39d45f) [![Stargazers](https://img.shields.io/github/stars/BertBR/RetroGamesBot?color=39d45f&logo=github)](https://github.com/BertBR/RetroGamesBot/stargazers)
 
-## RetroGames 🇧🇷 - Bot
+# RetroGames 🇧🇷 - Bot
 
-### V 2.0 - Changelog
+## V 2.0 - Changelog
+
 - Projeto refatorado, eliminando a dependência do Firestore;
 - Migramos os dados para uma base Postgres;
 - Agora nossa base de jogos está pública: [Database](https://github.com/BertBR/RetroGamesBot/blob/master/src/migration/games_postgres.sql)
@@ -26,7 +18,7 @@ Bot from [RetroGames 🇧🇷](http://t.me/retrogamesbr)
 > - Premiações e brindes para os membros mais participativos
 > - Top 10 Games, Consoles e Gêneros mais sorteados
 
-### :gear: Como funciona
+## :gear: Como funciona
 
 - Sorteio de jogos retrô todo sábado às 00:05hs
 
@@ -36,15 +28,15 @@ Bot from [RetroGames 🇧🇷](http://t.me/retrogamesbr)
 
   ![](.readme/assets/ss02.png)
 
-<a id="como-contribuir"></a>
+[]()
 
-## :recycle: Como contribuir
+# :recycle: Como contribuir
 
 - Faça um Fork desse repositório,
 - Crie uma branch com a sua feature: `git checkout -b my-feature`
 - Commit suas mudanças: `git commit -m 'feat: My new feature'`
 - Push a sua branch: `git push origin my-feature`
 
-## :memo: License
+# :memo: License
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Esse projeto está sob a licença MIT. Veja o arquivo <LICENSE> para mais detalhes.
