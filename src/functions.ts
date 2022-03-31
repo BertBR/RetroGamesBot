@@ -18,6 +18,7 @@ const numbers = [
   '🔟',
 ];
 const cache = new Cache();
+const db = new Database();
 
 type GamesCache = {
   total: number,
@@ -31,8 +32,8 @@ export const getTotalGames = async (ctx: Context<Update>) => {
     greetings = `Olá ${ctx.from?.first_name}.\nTotal de ${isCached.total} jogos cadastrados na base!\n\n`;
     return greetings + isCached.data;
   }
-  const total = await new Database().getTotalGames();
-  const res = await new Database().getTotalGamesCountByConsole();
+  const total = await db.getTotalGames();
+  const res = await db.getTotalGamesCountByConsole();
   greetings = `Olá ${ctx.from?.first_name}.\nTotal de ${total.rows[0].count} jogos cadastrados na base!\n\n`;
   let data = '';
   res.rows.forEach((r) => {
@@ -51,7 +52,7 @@ export const getTotalSortedByConsole = async (ctx: Context<Update>) => {
     return greetings + isCached.data;
   }
 
-  const res = await new Database().getTotalSortedBy('console');
+  const res = await db.getTotalSortedBy('console');
   let data = '';
   res.rows.forEach((r, i) => {
     data += `${numbers[i]} ${r.console.toUpperCase()} : ${r.sum}\n`;
@@ -68,7 +69,7 @@ export const getTotalSortedByGenre = async (ctx: Context<Update>) => {
     greetings = `Olá ${ctx.from?.first_name}.\nAqui está a lista dos TOP 10 gêneros mais sorteados!\n\n`;
     return greetings + isCached.data;
   }
-  const res = await new Database().getTotalSortedBy('genre');
+  const res = await db.getTotalSortedBy('genre');
   let data = '';
   res.rows.forEach((r, i) => {
     data += `${numbers[i]} ${r.genre.toUpperCase()} : ${r.sum}\n`;
@@ -85,7 +86,7 @@ export const getTotalSortedGames = async (ctx: Context<Update>) => {
     greetings = `Olá ${ctx.from?.first_name}.\nAqui está a lista dos TOP 10 games mais sorteados!\n\n`;
     return greetings + isCached.data;
   }
-  const res = await new Database().getTotalSortedGames();
+  const res = await db.getTotalSortedGames();
   let data = '';
   res.rows.forEach((r, i) => {
     data += `${numbers[i]} [${r.title}](${r.image_url}) : ${r.sum}\n`;
@@ -104,7 +105,7 @@ export const sortThreeGames = async (ctx: Context<Update>) => {
     return;
   }
 
-  const res = await new Database().getThreeRandomGames();
+  const res = await db.getThreeRandomGames();
   const caption = `Estes foram os jogos sorteados para a Maratona Retrô (Semanal):\n\n
 1️⃣ - [${res.rows[0].title}](${res.rows[0].file_url}) (${res.rows[0].genre})\n
 2️⃣ - [${res.rows[1].title}](${res.rows[1].file_url}) (${res.rows[1].genre})\n
@@ -130,6 +131,8 @@ export const sortThreeGames = async (ctx: Context<Update>) => {
     ],
   );
 
-  ctx.telegram.pinChatMessage(chatId, msg[0].message_id);
-  ctx.telegram.sendMessage(adminId, caption, { parse_mode: 'Markdown', disable_web_page_preview: true });
+  await ctx.telegram.pinChatMessage(chatId, msg[0].message_id);
+  await ctx.telegram.sendMessage(adminId, caption, { parse_mode: 'Markdown', disable_web_page_preview: true });
+
+  await db.incrementSortedGames([res.rows[0].id, res.rows[1].id, res.rows[2].id]);
 };

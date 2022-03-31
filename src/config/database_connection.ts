@@ -37,4 +37,14 @@ export default class Database {
     return this.pool.query(`SELECT * FROM games
     ORDER BY random() LIMIT 5;`);
   }
+
+  async incrementSortedGames(ids: Array<number>) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const id of ids) {
+      // eslint-disable-next-line no-await-in-loop
+      await this.pool.query(`UPDATE games 
+      SET sorted = sorted + 1
+   WHERE id = ${id};`);
+    }
+  }
 }
