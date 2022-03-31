@@ -1,5 +1,7 @@
-import { Pool } from 'pg';
+import pg, { Pool } from 'pg';
 
+pg.defaults.ssl = true;
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 export default class Database {
   private pool = new Pool({
     user: process.env.POSTGRES_USERNAME,
@@ -7,7 +9,6 @@ export default class Database {
     database: process.env.POSTGRES_DATABASE,
     password: process.env.POSTGRES_PASSWORD,
     port: 5432,
-    ssl: { rejectUnauthorized: process.env.POSTGRES_HOST !== 'localhost' },
   });
 
   async getTotalGames() {
