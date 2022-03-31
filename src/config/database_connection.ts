@@ -7,7 +7,7 @@ export default class Database {
     database: process.env.POSTGRES_DATABASE,
     password: process.env.POSTGRES_PASSWORD,
     port: 5432,
-    ssl: process.env.POSTGRES_HOST !== 'localhost',
+    ssl: { rejectUnauthorized: false },
   });
 
   async getTotalGames() {
