@@ -1,3 +1,4 @@
+import 'newrelic';
 import 'dotenv/config';
 import bot from './bot';
 
