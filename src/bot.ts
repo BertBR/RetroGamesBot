@@ -18,6 +18,8 @@ bot.launch({
 
 console.log(`Webhook set to ${process.env.WEBHOOK_URL}`);
 
+bot.command('test', (ctx) => console.log(ctx))
+
 bot.command('count', async (ctx) => ctx.reply(await getTotalGames(ctx)));
 bot.command('consoles', async (ctx) => ctx.reply(await getTotalSortedByConsole(ctx)));
 bot.command('genres', async (ctx) => ctx.reply(await getTotalSortedByGenre(ctx)));
