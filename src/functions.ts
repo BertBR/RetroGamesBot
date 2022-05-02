@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import Context from 'telegraf/typings/context';
 // eslint-disable-next-line import/no-unresolved
-import { Update } from 'telegraf/typings/core/types/typegram';
+import { InputMediaPhoto, Update } from 'telegraf/typings/core/types/typegram';
 import Cache from './config/caching';
 import Database from './config/database_connection';
 
@@ -23,6 +23,11 @@ const db = new Database();
 type GamesCache = {
   total: number,
   data: string
+}
+
+export type SortedResponse = {
+  mediaGroupMsg: ReadonlyArray<InputMediaPhoto>
+  ids: number[]
 }
 
 export const getTotalGames = async (ctx: Context<Update>) => {
@@ -96,12 +101,12 @@ export const getTotalSortedGames = async (ctx: Context<Update>) => {
   return greetings + data;
 };
 
-export const sortThreeGames = async (ctx: Context<Update>) => {
+export const sortThreeGames = async (ctx?: Context<Update>): Promise<void | SortedResponse> => {
   const chatId = parseInt(process.env.CHAT_ID || '0', 10);
   const adminId = parseInt(process.env.ADMIN_ID || '0', 10);
 
-  if (ctx.from?.id !== adminId) {
-    ctx.reply('Você não tem permissão para executar esta ação!');
+  if (ctx && ctx?.from?.id !== adminId) {
+    ctx?.reply('Você não tem permissão para executar esta ação!');
     return;
   }
 
@@ -111,28 +116,38 @@ export const sortThreeGames = async (ctx: Context<Update>) => {
 2️⃣ - [${res.rows[1].title}](${res.rows[1].file_url}) (${res.rows[1].genre})\n
 3️⃣ - [${res.rows[2].title}](${res.rows[2].file_url}) (${res.rows[2].genre})`;
 
+  const mediaGroupMsg: ReadonlyArray<InputMediaPhoto> = [
+    {
+      media: res.rows[0].image_url,
+      caption,
+      type: 'photo',
+      parse_mode: 'Markdown',
+    },
+    {
+      media: res.rows[1].image_url,
+      type: 'photo',
+    },
+    {
+      media: res.rows[2].image_url,
+      type: 'photo',
+    },
+  ];
+
+  if (!ctx) {
+    return {mediaGroupMsg, ids: [res.rows[0].id, res.rows[1].id, res.rows[2].id]}
+  }
+
   const msg = await ctx.telegram.sendMediaGroup(
     chatId,
-    [
-      {
-        media: res.rows[0].image_url,
-        caption,
-        type: 'photo',
-        parse_mode: 'Markdown',
-      },
-      {
-        media: res.rows[1].image_url,
-        type: 'photo',
-      },
-      {
-        media: res.rows[2].image_url,
-        type: 'photo',
-      },
-    ],
+    mediaGroupMsg
   );
 
   await ctx.telegram.pinChatMessage(chatId, msg[0].message_id);
   await ctx.telegram.sendMessage(adminId, caption, { parse_mode: 'Markdown', disable_web_page_preview: true });
-
-  await db.incrementSortedGames([res.rows[0].id, res.rows[1].id, res.rows[2].id]);
+  
+  await incrementSorteGamesInDatabase([res.rows[0].id, res.rows[1].id, res.rows[2].id]);  
 };
+
+export const incrementSorteGamesInDatabase = async(ids: number[]) => {
+  await db.incrementSortedGames(ids);
+}
