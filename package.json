@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "cron": "^1.8.3",
     "dotenv": "^16.0.0",
     "newrelic": "^8.9.1",
     "node-cache": "^5.1.2",
@@ -22,6 +23,7 @@
     "telegraf": "^4.7.0"
   },
   "devDependencies": {
+    "@types/cron": "^1.7.3",
     "@types/node": "^17.0.23",
     "@types/pg": "^8.6.5",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
