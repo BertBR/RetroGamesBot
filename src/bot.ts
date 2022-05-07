@@ -22,7 +22,7 @@ bot.launch({
 console.log(`Webhook set to ${process.env.WEBHOOK_URL}`);
 
 var job = new CronJob(
-  '0 0 * * 6',
+  '0 20 * * 5',
   async function () {
     const chatId = process.env.CHAT_ID ?? 0;
     const res = await sortThreeGames() as SortedResponse;
